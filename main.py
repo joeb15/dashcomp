@@ -11,7 +11,7 @@ bg_scale = 1
 def setup_display():
     global screen, image
     pg.init()
-    screen = pg.display.set_mode((width, height))
+    screen = pg.display.set_mode((width, height), pg.FULLSCREEN)
     image = pg.transform.scale(pg.image.load('bg.png'), ((int)(width*bg_scale), (int)(height*bg_scale)))
 
 
@@ -19,7 +19,7 @@ def loop():
     global mousePos, mouseDown, screen
     while True:
         for event in pg.event.get():
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 sys.exit()
             elif event.type == pg.MOUSEMOTION:
                 mousePos = event.pos
