@@ -11,6 +11,7 @@ bg_scale = 1
 def setup_display():
     global screen, image
     pg.init()
+    pg.mouse.set_visible(False)
     screen = pg.display.set_mode((width, height), pg.FULLSCREEN)
     image = pg.transform.scale(pg.image.load('bg.png'), ((int)(width*bg_scale), (int)(height*bg_scale)))
 
