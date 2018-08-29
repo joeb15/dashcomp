@@ -1,5 +1,10 @@
 import pygame as pg
 import sys
+from classes import Variables
+
+if not 'jeep_vars' in sys.modules.keys():
+    sys.modules['jeep_vars'] = Variables()
+variables = sys.modules['jeep_vars']
 
 mousePos = (None, None)
 mouseDown = [False]*8
@@ -12,7 +17,7 @@ def setup_display():
     global screen, image
     pg.init()
     pg.mouse.set_visible(False)
-    screen = pg.display.set_mode((width, height), pg.FULLSCREEN)
+    screen = pg.display.set_mode((width, height))
     image = pg.transform.scale(pg.image.load('bg.png'), ((int)(width*bg_scale), (int)(height*bg_scale)))
 
 
@@ -21,6 +26,7 @@ def loop():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                pg.quit()
                 sys.exit()
             elif event.type == pg.MOUSEMOTION:
                 mousePos = event.pos
